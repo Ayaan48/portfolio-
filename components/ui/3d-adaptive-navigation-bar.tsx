@@ -33,7 +33,7 @@ export const PillBase: React.FC = () => {
   useEffect(() => {
     if (hovering) {
       setExpanded(true)
-      pillWidth.set(400)
+      pillWidth.set(Math.min(400, window.innerWidth - 32))
       if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current)
     } else {
       hoverTimeoutRef.current = setTimeout(() => {

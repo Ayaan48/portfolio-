@@ -108,9 +108,8 @@ export default function Component() {
       </div>
 
       {/* Header */}
-      <header className="fixed top-0 right-0 z-50 px-2 pt-6 pb-4">
+      <header className="fixed top-0 right-0 z-40 px-2 pt-6 pb-4 hidden sm:block">
         <nav className="flex items-center justify-end max-w-screen-2xl mx-auto">
-          {/* Right side: Gooey Text */}
           <GooeyText
             texts={[
               "The Goal Is to Become So",
@@ -129,49 +128,50 @@ export default function Component() {
 
       {/* Hero Section */}
       <main className="relative z-10 min-h-screen flex flex-col">
-        {/* Name - independently positioned */}
-        <div className="absolute top-24 left-6 md:left-10">
-          <BlurText
-            text="SHAIK MOHAMMAD MURTUZAA AYAAN"
-            delay={50}
-            animateBy="words"
-            direction="top"
-            className="font-bold text-[18px] sm:text-[22px] md:text-[28px] lg:text-[34px] leading-none tracking-[0.1em] uppercase justify-start whitespace-nowrap"
-            style={{
-              color: "#7EB8F7",
-              fontFamily: "var(--font-fira-code), monospace",
-              textShadow: "0 0 30px rgba(126, 184, 247, 0.6), 0 0 70px rgba(100, 160, 255, 0.3)",
-              WebkitTextStroke: "1px rgba(126,184,247,0.25)",
-            }}
-          />
-          <p className="mt-3 max-w-[560px] md:max-w-[680px] text-[13px] sm:text-[14px] md:text-[15px] text-white/70 leading-relaxed" style={{ textShadow: "0 0 8px rgba(255,255,255,0.4), 0 0 20px rgba(255,255,255,0.15)" }}>
-            I&apos;m a B.Tech Computer Science student who loves learning new technologies and improving my skills every day. I&apos;m currently exploring Java, Python, and full-stack web development, and I enjoy building projects that solve real-world problems. I&apos;m deeply passionate about growth, consistency, and continuous learning — always striving to become a better developer step by step.
-          </p>
-        </div>
-
-        {/* Profile Picture - independently positioned */}
-        <div className="absolute top-24 right-24">
-          <div className="w-[100px] h-[160px] sm:w-[130px] sm:h-[210px] md:w-[160px] md:h-[260px] lg:w-[190px] lg:h-[310px] rounded-full overflow-hidden shadow-2xl transition-transform duration-300 hover:scale-110 cursor-pointer">
-            <img
-              src="/profile.jpeg"
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
+        {/* Name + Profile — stacked on mobile, side-by-side on sm+ */}
+        <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between px-6 md:px-10 pt-24 gap-8 sm:gap-6">
+          {/* Profile Picture — top on mobile, right on desktop */}
+          <div className="order-first sm:order-last flex-shrink-0">
+            <div className="w-[110px] h-[110px] sm:w-[130px] sm:h-[210px] md:w-[160px] md:h-[260px] lg:w-[190px] lg:h-[310px] rounded-full overflow-hidden shadow-2xl transition-transform duration-300 hover:scale-110 cursor-pointer">
+              <img
+                src="/profile.jpeg"
+                alt="Profile"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
-        </div>
 
-        {/* Tagline - Proper Distance Below Hero */}
-        <div className="absolute bottom-16 sm:bottom-20 md:bottom-24 lg:bottom-32 xl:bottom-36 left-1/2 -translate-x-1/2 w-full px-6">
-          <div className="flex justify-center">
+          {/* Name + Bio */}
+          <div className="order-last sm:order-first flex-1 min-w-0 text-center sm:text-left">
             <BlurText
-              text="future developer"
-              delay={150}
+              text="SHAIK MOHAMMAD MURTUZAA AYAAN"
+              delay={50}
               animateBy="words"
               direction="top"
-              className="text-[13px] sm:text-[15px] md:text-[17px] lg:text-[19px] text-center tracking-[0.3em] uppercase transition-colors duration-300 text-neutral-500 hover:text-black dark:hover:text-white"
-              style={{ fontFamily: "var(--font-antic), sans-serif", letterSpacing: "0.35em" }}
+              className="font-bold text-[16px] sm:text-[20px] md:text-[26px] lg:text-[34px] leading-tight tracking-[0.08em] uppercase justify-center sm:justify-start"
+              style={{
+                color: "#7EB8F7",
+                fontFamily: "var(--font-fira-code), monospace",
+                textShadow: "0 0 30px rgba(126, 184, 247, 0.6), 0 0 70px rgba(100, 160, 255, 0.3)",
+                WebkitTextStroke: "1px rgba(126,184,247,0.25)",
+              }}
             />
+            <p className="mt-3 max-w-[560px] md:max-w-[680px] mx-auto sm:mx-0 text-[12px] sm:text-[13px] md:text-[15px] text-white/70 leading-relaxed" style={{ textShadow: "0 0 8px rgba(255,255,255,0.4), 0 0 20px rgba(255,255,255,0.15)" }}>
+              I&apos;m a B.Tech Computer Science student who loves learning new technologies and improving my skills every day. I&apos;m currently exploring Java, Python, and full-stack web development, and I enjoy building projects that solve real-world problems. I&apos;m deeply passionate about growth, consistency, and continuous learning — always striving to become a better developer step by step.
+            </p>
           </div>
+        </div>
+
+        {/* Tagline */}
+        <div className="flex-1 flex items-end justify-center pb-20 md:pb-28 px-6">
+          <BlurText
+            text="future developer"
+            delay={150}
+            animateBy="words"
+            direction="top"
+            className="text-[12px] sm:text-[15px] md:text-[17px] lg:text-[19px] text-center tracking-[0.3em] uppercase transition-colors duration-300 text-neutral-500 hover:text-black dark:hover:text-white"
+            style={{ fontFamily: "var(--font-antic), sans-serif", letterSpacing: "0.35em" }}
+          />
         </div>
 
         {/* Scroll Indicator */}
