@@ -212,6 +212,12 @@
 #subtitle { display: none; }
 /* ── End Cosmic ── */
 
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
