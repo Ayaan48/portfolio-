@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/Ace/AppData/Local/Temp/claude/c--Users-Ace-Desktop-portfolio/ec2f92d3-fbe0-4d6f-9e84-d14536316a59/tasks/**)",
+      "Bash(kill %1)",
+      "Bash(npx shadcn@latest init --defaults)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(node -e \"const l = require\\('/c/Users/Ace/Desktop/portfolio/node_modules/lucide-react'\\); console.log\\(Object.keys\\(l\\).filter\\(k => /git|linked|twitter|x$/i.test\\(k\\)\\).join\\('\\\\n'\\)\\)\")"
+    ]
+  }
+}
