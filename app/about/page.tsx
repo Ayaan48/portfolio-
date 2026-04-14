@@ -70,7 +70,7 @@ export default function AboutPage() {
           <PillBase />
         </div>
 
-        <div className="max-w-3xl mx-auto px-6 py-16 flex flex-col gap-16">
+        <div className="max-w-3xl mx-auto px-6 py-16 flex flex-col gap-14">
 
           {/* Hero block */}
           <motion.section
@@ -79,18 +79,34 @@ export default function AboutPage() {
             initial="hidden"
             animate="visible"
           >
-            <div className="w-[65px] h-[110px] sm:w-[90px] sm:h-[152px] md:w-[110px] md:h-[185px] lg:w-[129px] lg:h-[218px] rounded-full overflow-hidden shadow-2xl shrink-0">
-              <img src="/profile.jpeg" alt="Ayaan" className="w-full h-full object-cover" />
+            {/* Profile with spinning ring */}
+            <div className="relative shrink-0" style={{ padding: "3px" }}>
+              <div
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: "conic-gradient(#C3E41D, #7EB8F7, #818cf8, #C3E41D)",
+                  animation: "spin-ring 5s linear infinite",
+                }}
+              />
+              <div className="relative w-[65px] h-[110px] sm:w-[90px] sm:h-[152px] md:w-[110px] md:h-[185px] lg:w-[129px] lg:h-[218px] rounded-full overflow-hidden bg-black shadow-2xl">
+                <img src="/profile.jpeg" alt="Ayaan" className="w-full h-full object-cover" />
+              </div>
             </div>
 
             <div className="flex flex-col gap-3">
-              <h1 className="text-3xl font-bold tracking-tight" style={{ color: "#C3E41D" }}>
+              {/* Status badge */}
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-neutral-400 w-fit">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                Open to opportunities
+              </div>
+
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight shimmer-text" style={{ fontFamily: "var(--font-fira-code)" }}>
                 Shaik Mohammad Murtuzaa Ayaan
               </h1>
-              <p className="text-neutral-400 text-sm tracking-widest uppercase">
-                B.Tech Computer Science Student
+              <p className="text-neutral-500 text-xs tracking-widest uppercase">
+                B.Tech Computer Science Student &nbsp;·&nbsp; Full-Stack Developer
               </p>
-              <p className="text-neutral-300 leading-relaxed max-w-xl">
+              <p className="text-neutral-400 leading-relaxed max-w-xl text-sm">
                 I&apos;m a Computer Science student who loves learning new technologies and improving skills every day.
                 Currently exploring Java, Python, and full-stack web development — building projects that solve real-world problems.
                 Passionate about growth, consistency, and becoming a better developer step by step.
@@ -125,7 +141,7 @@ export default function AboutPage() {
             </div>
           </motion.section>
 
-          <div className="h-px bg-neutral-900" />
+          <div className="h-px bg-gradient-to-r from-transparent via-neutral-800 to-transparent" />
 
           {/* Skills */}
           <motion.section
@@ -135,7 +151,7 @@ export default function AboutPage() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-            <h2 className="text-sm font-semibold text-neutral-400 tracking-widest uppercase">
+            <h2 className="text-xs font-semibold text-neutral-500 tracking-[0.2em] uppercase">
               Skills & Technologies
             </h2>
             <div className="flex flex-wrap gap-2">
@@ -149,7 +165,7 @@ export default function AboutPage() {
                 >
                   <Badge
                     variant="outline"
-                    className="border-neutral-800 text-neutral-400 hover:border-[#C3E41D] hover:text-[#C3E41D] transition-colors cursor-default px-3 py-1"
+                    className="border-white/[0.08] bg-white/[0.03] text-neutral-400 hover:border-[#C3E41D]/60 hover:text-[#C3E41D] hover:bg-[#C3E41D]/5 transition-all cursor-default px-3 py-1"
                   >
                     {skill}
                   </Badge>
@@ -158,7 +174,7 @@ export default function AboutPage() {
             </div>
           </motion.section>
 
-          <div className="h-px bg-neutral-900" />
+          <div className="h-px bg-gradient-to-r from-transparent via-neutral-800 to-transparent" />
 
           {/* Currently exploring */}
           <motion.section
@@ -168,31 +184,33 @@ export default function AboutPage() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-            <h2 className="text-sm font-semibold text-neutral-400 tracking-widest uppercase">
+            <h2 className="text-xs font-semibold text-neutral-500 tracking-[0.2em] uppercase">
               Currently Exploring
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {[
-                { title: "Java", desc: "Data structures, OOP, and backend development." },
-                { title: "Python", desc: "Scripting, automation, and data exploration." },
-                { title: "Full-Stack Web", desc: "React, Next.js, Node.js, and databases." },
-              ].map(({ title, desc }, i) => (
+                { title: "Java", desc: "Data structures, OOP, and backend development.", accent: "#7EB8F7" },
+                { title: "Python", desc: "Scripting, automation, and data exploration.", accent: "#c084fc" },
+                { title: "Full-Stack Web", desc: "React, Next.js, Node.js, and databases.", accent: "#C3E41D" },
+              ].map(({ title, desc, accent }, i) => (
                 <motion.div
                   key={title}
-                  className="rounded-xl border border-neutral-900 bg-neutral-950 p-4 flex flex-col gap-2 hover:border-neutral-700 transition-colors"
+                  className="rounded-xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm p-5 flex flex-col gap-2 hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300"
+                  style={{ boxShadow: `0 0 0 0 ${accent}00` }}
+                  whileHover={{ boxShadow: `0 0 20px ${accent}18` }}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.12 }}
                 >
-                  <span className="text-sm font-semibold text-white">{title}</span>
+                  <span className="text-sm font-semibold text-white/90" style={{ color: accent }}>{title}</span>
                   <span className="text-xs text-neutral-500 leading-relaxed">{desc}</span>
                 </motion.div>
               ))}
             </div>
           </motion.section>
 
-          <div className="h-px bg-neutral-900" />
+          <div className="h-px bg-gradient-to-r from-transparent via-neutral-800 to-transparent" />
 
           {/* CTA */}
           <motion.section

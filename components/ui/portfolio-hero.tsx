@@ -151,43 +151,76 @@ export default function Component() {
 
       {/* Hero Section */}
       <main className="relative z-10 min-h-screen flex flex-col">
-        {/* Name + Profile — stacked on mobile, side-by-side on sm+ */}
-        <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between px-6 md:px-10 pt-24 gap-8 sm:gap-6">
-          {/* Profile Picture — parallax shifts forward (same direction as mouse) */}
+        <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between px-6 md:px-10 pt-20 gap-8 sm:gap-10">
+
+          {/* Profile — spinning gradient ring + ambient glow */}
           <motion.div
-            className="order-first sm:order-last flex-shrink-0"
+            className="order-first sm:order-last flex-shrink-0 relative"
             style={{ x: springX, y: springY }}
           >
-            <div className="w-[110px] h-[110px] sm:w-[130px] sm:h-[210px] md:w-[160px] md:h-[260px] lg:w-[190px] lg:h-[310px] rounded-full overflow-hidden shadow-2xl transition-transform duration-300 hover:scale-110 cursor-pointer">
-              <img
-                src="/profile.jpeg"
-                alt="Profile"
-                className="w-full h-full object-cover"
+            {/* Ambient glow behind */}
+            <div className="absolute -inset-6 rounded-full bg-blue-500/10 blur-2xl pointer-events-none" />
+
+            {/* Spinning gradient ring */}
+            <div className="relative" style={{ padding: "3px" }}>
+              <div
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: "conic-gradient(#7EB8F7, #818cf8, #c084fc, #38bdf8, #7EB8F7)",
+                  animation: "spin-ring 5s linear infinite",
+                }}
               />
+              <div className="relative w-[110px] h-[110px] sm:w-[140px] sm:h-[220px] md:w-[165px] md:h-[265px] lg:w-[195px] lg:h-[315px] rounded-full overflow-hidden bg-black hover:scale-105 transition-transform duration-500">
+                <img src="/profile.jpeg" alt="Profile" className="w-full h-full object-cover" />
+              </div>
             </div>
           </motion.div>
 
-          {/* Name + Bio — parallax shifts backward (opposite direction for depth) */}
+          {/* Text — glass card */}
           <motion.div
-            className="order-last sm:order-first flex-1 min-w-0 text-center sm:text-left"
+            className="order-last sm:order-first flex-1 min-w-0"
             style={{ x: negSpringX, y: negSpringY }}
           >
-            <BlurText
-              text="SHAIK MOHAMMAD MURTUZAA AYAAN"
-              delay={50}
-              animateBy="words"
-              direction="top"
-              className="font-bold text-[16px] sm:text-[20px] md:text-[26px] lg:text-[34px] leading-tight tracking-[0.08em] uppercase justify-center sm:justify-start"
-              style={{
-                color: "#7EB8F7",
-                fontFamily: "var(--font-fira-code), monospace",
-                textShadow: "0 0 30px rgba(126, 184, 247, 0.6), 0 0 70px rgba(100, 160, 255, 0.3)",
-                WebkitTextStroke: "1px rgba(126,184,247,0.25)",
-              }}
-            />
-            <p className="mt-3 max-w-[560px] md:max-w-[680px] mx-auto sm:mx-0 text-[12px] sm:text-[13px] md:text-[15px] text-white/70 leading-relaxed" style={{ textShadow: "0 0 8px rgba(255,255,255,0.4), 0 0 20px rgba(255,255,255,0.15)" }}>
-              I&apos;m a B.Tech Computer Science student who loves learning new technologies and improving my skills every day. I&apos;m currently exploring Java, Python, and full-stack web development, and I enjoy building projects that solve real-world problems. I&apos;m deeply passionate about growth, consistency, and continuous learning — always striving to become a better developer step by step.
-            </p>
+            <div className="backdrop-blur-md bg-white/[0.03] border border-white/[0.07] rounded-2xl p-6 sm:p-8 shadow-[0_0_40px_rgba(126,184,247,0.06)]">
+
+              {/* Status badge */}
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-neutral-400 mb-5">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                Open to opportunities
+              </div>
+
+              {/* Name with shimmer */}
+              <BlurText
+                text="SHAIK MOHAMMAD MURTUZAA AYAAN"
+                delay={50}
+                animateBy="words"
+                direction="top"
+                className="shimmer-text font-bold text-[16px] sm:text-[20px] md:text-[26px] lg:text-[34px] leading-tight tracking-[0.08em] uppercase justify-center sm:justify-start"
+                style={{ fontFamily: "var(--font-fira-code), monospace" }}
+              />
+
+              {/* Role line */}
+              <p className="mt-2 text-[11px] sm:text-[13px] text-neutral-500 tracking-[0.2em] uppercase" style={{ fontFamily: "var(--font-antic)" }}>
+                B.Tech CS Student &nbsp;·&nbsp; Full-Stack Developer
+              </p>
+
+              {/* Bio */}
+              <p className="mt-4 max-w-[560px] text-[12px] sm:text-[13px] md:text-[14px] text-white/60 leading-relaxed">
+                I love learning new technologies and improving my skills every day. Currently exploring Java, Python, and full-stack web development — building projects that solve real-world problems. Passionate about growth, consistency, and becoming a better developer step by step.
+              </p>
+
+              {/* Tech stack chips */}
+              <div className="flex flex-wrap gap-2 mt-5">
+                {["Java", "Python", "React", "Next.js", "TypeScript", "Node.js", "Tailwind"].map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-2.5 py-1 rounded-md text-[11px] bg-white/[0.04] border border-white/[0.08] text-neutral-400 hover:border-[#7EB8F7]/60 hover:text-[#7EB8F7] transition-all duration-200"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
           </motion.div>
         </div>
 
@@ -198,20 +231,20 @@ export default function Component() {
             delay={150}
             animateBy="words"
             direction="top"
-            className="text-[12px] sm:text-[15px] md:text-[17px] lg:text-[19px] text-center tracking-[0.3em] uppercase transition-colors duration-300 text-neutral-500 hover:text-black dark:hover:text-white"
-            style={{ fontFamily: "var(--font-antic), sans-serif", letterSpacing: "0.35em" }}
+            className="text-[11px] sm:text-[14px] md:text-[16px] lg:text-[18px] text-center tracking-[0.4em] uppercase text-neutral-600"
+            style={{ fontFamily: "var(--font-antic)", letterSpacing: "0.4em" }}
           />
         </div>
 
         {/* Scroll Indicator */}
         <motion.button
           type="button"
-          className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 transition-colors duration-300"
+          className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2"
           aria-label="Scroll down"
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown className="w-5 h-5 md:w-8 md:h-8 text-neutral-500 hover:text-black dark:hover:text-white transition-colors duration-300" />
+          <ChevronDown className="w-5 h-5 md:w-7 md:h-7 text-neutral-600 hover:text-[#7EB8F7] transition-colors duration-300" />
         </motion.button>
       </main>
     </div>
