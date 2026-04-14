@@ -1,11 +1,17 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
 import { ExternalLink, Download } from "lucide-react";
 import { PillBase } from "@/components/ui/3d-adaptive-navigation-bar";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
 
 const skills = [
   "Java", "Python", "TypeScript", "React", "Next.js",
@@ -67,7 +73,12 @@ export default function AboutPage() {
         <div className="max-w-3xl mx-auto px-6 py-16 flex flex-col gap-16">
 
           {/* Hero block */}
-          <section className="flex flex-col sm:flex-row items-start gap-8">
+          <motion.section
+            className="flex flex-col sm:flex-row items-start gap-8"
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+          >
             <div className="w-[65px] h-[110px] sm:w-[90px] sm:h-[152px] md:w-[110px] md:h-[185px] lg:w-[129px] lg:h-[218px] rounded-full overflow-hidden shadow-2xl shrink-0">
               <img src="/profile.jpeg" alt="Ayaan" className="w-full h-full object-cover" />
             </div>
@@ -112,32 +123,51 @@ export default function AboutPage() {
                 ))}
               </div>
             </div>
-          </section>
+          </motion.section>
 
           <div className="h-px bg-neutral-900" />
 
           {/* Skills */}
-          <section className="flex flex-col gap-4">
+          <motion.section
+            className="flex flex-col gap-4"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <h2 className="text-sm font-semibold text-neutral-400 tracking-widest uppercase">
               Skills & Technologies
             </h2>
             <div className="flex flex-wrap gap-2">
-              {skills.map((skill) => (
-                <Badge
+              {skills.map((skill, i) => (
+                <motion.div
                   key={skill}
-                  variant="outline"
-                  className="border-neutral-800 text-neutral-400 hover:border-[#C3E41D] hover:text-[#C3E41D] transition-colors cursor-default px-3 py-1"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: i * 0.05 }}
                 >
-                  {skill}
-                </Badge>
+                  <Badge
+                    variant="outline"
+                    className="border-neutral-800 text-neutral-400 hover:border-[#C3E41D] hover:text-[#C3E41D] transition-colors cursor-default px-3 py-1"
+                  >
+                    {skill}
+                  </Badge>
+                </motion.div>
               ))}
             </div>
-          </section>
+          </motion.section>
 
           <div className="h-px bg-neutral-900" />
 
           {/* Currently exploring */}
-          <section className="flex flex-col gap-4">
+          <motion.section
+            className="flex flex-col gap-4"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <h2 className="text-sm font-semibold text-neutral-400 tracking-widest uppercase">
               Currently Exploring
             </h2>
@@ -146,22 +176,32 @@ export default function AboutPage() {
                 { title: "Java", desc: "Data structures, OOP, and backend development." },
                 { title: "Python", desc: "Scripting, automation, and data exploration." },
                 { title: "Full-Stack Web", desc: "React, Next.js, Node.js, and databases." },
-              ].map(({ title, desc }) => (
-                <div
+              ].map(({ title, desc }, i) => (
+                <motion.div
                   key={title}
                   className="rounded-xl border border-neutral-900 bg-neutral-950 p-4 flex flex-col gap-2 hover:border-neutral-700 transition-colors"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.12 }}
                 >
                   <span className="text-sm font-semibold text-white">{title}</span>
                   <span className="text-xs text-neutral-500 leading-relaxed">{desc}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </section>
+          </motion.section>
 
           <div className="h-px bg-neutral-900" />
 
           {/* CTA */}
-          <section className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <motion.section
+            className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <div>
               <p className="text-neutral-300 font-medium">Interested in working together?</p>
               <p className="text-neutral-600 text-sm">Feel free to reach out anytime.</p>
@@ -182,7 +222,7 @@ export default function AboutPage() {
                 Get in touch <ExternalLink className="size-4" />
               </button>
             </div>
-          </section>
+          </motion.section>
 
         </div>
 
